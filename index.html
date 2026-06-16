@@ -1,34 +1,910 @@
-<form action="https://formspree.io/f/votrecode" method="POST">
-  <label>Nom complet:<br><input type="text" name="name" required></label><br>
-  <label>Email:<br><input type="email" name="_replyto" required></label><br>
-  <label>Téléphone:<br><input type="tel" name="phone"></label><br>
-  <label>Date souhaitée:<br><input type="date" name="date" required></label><br>
-  <label>Message:<br><textarea name="message"></textarea></label><br>
-  <button type="submit">Envoyer</button>
-</form>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SM-tech Salam — Innovation claire, design précis</title>
+  <meta name="description" content="SM-tech Salam — identité tech premium, univers chrome bleu, site vitrine moderne et immersif." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #edf2f7;
+      --bg-soft: #f8fbff;
+      --panel: rgba(255,255,255,.62);
+      --panel-strong: rgba(255,255,255,.84);
+      --text: #0c1a2d;
+      --muted: #526377;
+      --line: rgba(19,48,83,.12);
+      --navy: #12325d;
+      --navy-deep: #081a33;
+      --steel: #6e7d90;
+      --cyan: #7cecff;
+      --blue: #2c7ed8;
+      --ice: #dff7ff;
+      --shadow: 0 20px 60px rgba(20,40,80,.12);
+      --shadow-strong: 0 28px 90px rgba(20,40,80,.18);
+      --radius: 24px;
+      --radius-lg: 34px;
+      --max: 1240px;
+    }
 
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Manrope", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(124,236,255,.35), transparent 24%),
+        radial-gradient(circle at 80% 18%, rgba(44,126,216,.18), transparent 18%),
+        linear-gradient(180deg, #f7fbff 0%, #eef3f8 45%, #e8eef5 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
 
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.42;
+      background:
+        linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,.35)),
+        radial-gradient(circle at 50% 50%, rgba(0,0,0,.025), transparent 60%);
+      mix-blend-mode:soft-light;
+    }
 
-<section id="contact" style="padding:40px; max-width:600px; margin:auto;">
-  <h2>Prendre rendez-vous</h2>
-  <form action="https://formspree.io/f/votrecode" method="POST">
-    <label for="name">Nom complet :</label><br />
-    <input type="text" id="name" name="name" required style="width:100%; padding:8px; margin-bottom:12px;" /><br />
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.1;
+      background-image:
+        linear-gradient(to right, rgba(14,34,66,.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(14,34,66,.06) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+    }
 
-    <label for="email">Email :</label><br />
-    <input type="email" id="email" name="_replyto" required style="width:100%; padding:8px; margin-bottom:12px;" /><br />
+    .wrap{width:min(calc(100% - 32px), var(--max)); margin-inline:auto;}
 
-    <label for="phone">Téléphone :</label><br />
-    <input type="tel" id="phone" name="phone" style="width:100%; padding:8px; margin-bottom:12px;" /><br />
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:40;
+      backdrop-filter: blur(18px);
+      background:linear-gradient(180deg, rgba(250,253,255,.82), rgba(250,253,255,.55));
+      border-bottom:1px solid rgba(19,48,83,.08);
+    }
 
-    <label for="date">Date souhaitée :</label><br />
-    <input type="date" id="date" name="date" required style="width:100%; padding:8px; margin-bottom:12px;" /><br />
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      min-height:78px;
+    }
 
-    <label for="message">Message :</label><br />
-    <textarea id="message" name="message" rows="4" style="width:100%; padding:8px; margin-bottom:12px;"></textarea><br />
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      text-decoration:none;
+      color:inherit;
+    }
 
-    <button type="submit" style="padding:12px 24px; background:#2c7ed8; color:#fff; border:none; border-radius:8px; cursor:pointer;">
-      Envoyer
-    </button>
-  </form>
-</section>
+    .brand-mark{
+      width:48px;
+      aspect-ratio:1;
+      border-radius:14px;
+      position:relative;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.95), rgba(215,228,240,.95));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9),
+        inset 0 -2px 8px rgba(9,28,54,.08),
+        0 10px 24px rgba(22,47,89,.14);
+      border:1px solid rgba(24,49,86,.14);
+      overflow:hidden;
+    }
+
+    .brand-mark::before{
+      content:"SM";
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      font-family:"Orbitron", sans-serif;
+      font-weight:800;
+      font-size:1rem;
+      letter-spacing:-.08em;
+      color:transparent;
+      background:
+        linear-gradient(180deg, #8cf5ff 0%, #2f8ae2 38%, #112e59 80%, #09162d 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      text-shadow:
+        0 0 10px rgba(124,236,255,.25);
+      transform:translateY(-1px);
+    }
+
+    .brand-name{
+      display:flex;
+      flex-direction:column;
+      line-height:1;
+    }
+
+    .brand-name strong{
+      font-family:"Orbitron", sans-serif;
+      font-weight:800;
+      font-size:.95rem;
+      letter-spacing:.04em;
+    }
+
+    .brand-name span{
+      margin-top:5px;
+      font-size:.8rem;
+      color:var(--muted);
+    }
+
+    .nav-links{
+      display:none;
+      gap:28px;
+      align-items:center;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--text);
+      font-weight:700;
+      font-size:.95rem;
+      position:relative;
+    }
+
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-7px;
+      width:100%;
+      height:2px;
+      transform:scaleX(0);
+      transform-origin:right;
+      transition:transform .35s ease;
+      background:linear-gradient(90deg, var(--blue), var(--cyan));
+    }
+
+    .nav-links a:hover::after{transform:scaleX(1); transform-origin:left;}
+
+    .cta{
+      appearance:none;
+      border:none;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:14px 20px;
+      border-radius:999px;
+      font-weight:800;
+      color:white;
+      background:
+        linear-gradient(180deg, #284f88 0%, #112d57 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.35),
+        0 14px 30px rgba(18,50,93,.24);
+      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+
+    .cta:hover{
+      transform:translateY(-2px) scale(1.01);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.35),
+        0 18px 40px rgba(18,50,93,.32);
+      filter:saturate(1.06);
+    }
+
+    .cta:active{transform:translateY(0) scale(.99)}
+
+    .hero{
+      padding: clamp(40px, 6vw, 90px) 0 36px;
+      position:relative;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.62);
+      border:1px solid rgba(18,50,93,.1);
+      box-shadow:var(--shadow);
+      font-size:.85rem;
+      font-weight:800;
+      color:var(--navy);
+      width:max-content;
+      backdrop-filter: blur(14px);
+    }
+
+    .eyebrow::before{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:radial-gradient(circle, #9cf6ff 0%, #2f8de7 65%, #14325d 100%);
+      box-shadow:0 0 0 6px rgba(124,236,255,.12);
+    }
+
+    h1,h2,h3{
+      margin:0;
+      font-family:"Orbitron", sans-serif;
+      letter-spacing:-.05em;
+      line-height:.95;
+      color:var(--navy-deep);
+    }
+
+    h1{
+      font-size:clamp(3rem, 8vw, 7rem);
+      margin-top:18px;
+      max-width:10ch;
+    }
+
+    .hero-copy p{
+      font-size:clamp(1rem, 1.5vw, 1.15rem);
+      line-height:1.7;
+      color:var(--muted);
+      max-width:62ch;
+      margin:22px 0 0;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:30px;
+    }
+
+    .ghost{
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 20px;
+      border-radius:999px;
+      font-weight:800;
+      color:var(--navy);
+      background:rgba(255,255,255,.6);
+      border:1px solid rgba(18,50,93,.12);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(12px);
+      transition:transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+
+    .ghost:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.82);
+      border-color:rgba(18,50,93,.2);
+    }
+
+    .hero-visual{
+      position:relative;
+      min-height:420px;
+      display:grid;
+      place-items:center;
+      isolation:isolate;
+    }
+
+    .orb{
+      position:absolute;
+      width:74%;
+      aspect-ratio:1;
+      border-radius:50%;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(146,247,255,.95), rgba(77,172,255,.38) 28%, rgba(11,35,68,.04) 58%, transparent 70%);
+      filter:blur(8px);
+      opacity:.95;
+      z-index:-1;
+    }
+
+    .logo-stage{
+      width:min(100%, 540px);
+      aspect-ratio:1 / .94;
+      border-radius:36px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.82), rgba(235,242,249,.84));
+      border:1px solid rgba(18,50,93,.12);
+      box-shadow:var(--shadow-strong);
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(18px);
+    }
+
+    .logo-stage::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(141,245,255,.24), transparent 26%),
+        linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,.28) 35%, transparent 36%);
+      pointer-events:none;
+    }
+
+    .logo-stage::after{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.55);
+      pointer-events:none;
+    }
+
+    .sm-logo{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      padding:50px 40px 34px;
+    }
+
+    .monogram{
+      position:relative;
+      width:min(78%, 360px);
+      aspect-ratio:1 / .82;
+      filter:drop-shadow(0 20px 26px rgba(18,34,62,.22));
+    }
+
+    .monogram svg{
+      width:100%;
+      height:100%;
+      display:block;
+      overflow:visible;
+    }
+
+    .logo-text{
+      text-align:center;
+      margin-top:24px;
+    }
+
+    .logo-text .main{
+      display:block;
+      font-family:"Orbitron", sans-serif;
+      font-size:clamp(1.9rem, 4vw, 3.4rem);
+      font-weight:800;
+      letter-spacing:-.06em;
+      color:transparent;
+      background:linear-gradient(180deg, #234d86 0%, #163867 45%, #0b1f3e 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      text-shadow:0 6px 18px rgba(16,38,70,.12);
+    }
+
+    .logo-text .sub{
+      display:block;
+      margin-top:6px;
+      font-family:"Orbitron", sans-serif;
+      font-size:clamp(1rem, 2vw, 1.55rem);
+      letter-spacing:-.05em;
+      color:transparent;
+      background:linear-gradient(180deg, #375e94 0%, #17345f 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+    }
+
+    .spark{
+      position:absolute;
+      width:18px;
+      aspect-ratio:1;
+      right:26px;
+      bottom:28px;
+      transform:rotate(45deg);
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(170,225,255,.72));
+      border-radius:4px;
+      box-shadow:0 0 28px rgba(134,238,255,.42);
+    }
+
+    .metrics{
+      padding:18px 0 74px;
+    }
+
+    .metrics-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+    }
+
+    .metric{
+      padding:24px;
+      border-radius:24px;
+      background:var(--panel);
+      border:1px solid rgba(18,50,93,.1);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .metric strong{
+      display:block;
+      font-family:"Orbitron", sans-serif;
+      font-size:clamp(1.8rem, 4vw, 2.8rem);
+      color:var(--navy);
+    }
+
+    .metric span{
+      display:block;
+      margin-top:8px;
+      color:var(--muted);
+      font-weight:700;
+    }
+
+    section{
+      padding:84px 0;
+      position:relative;
+    }
+
+    .section-head{
+      display:grid;
+      gap:16px;
+      margin-bottom:34px;
+      max-width:860px;
+    }
+
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:1.02rem;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:22px;
+      align-items:stretch;
+    }
+
+    .glass{
+      background:var(--panel);
+      border:1px solid rgba(18,50,93,.1);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(16px);
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+    }
+
+    .panel-pad{padding:28px}
+
+    .principles{
+      display:grid;
+      gap:24px;
+    }
+
+    .principle{
+      padding-bottom:20px;
+      border-bottom:1px solid rgba(18,50,93,.09);
+    }
+
+    .principle:last-child{
+      border-bottom:none;
+      padding-bottom:0;
+    }
+
+    .principle small{
+      display:block;
+      color:var(--blue);
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+
+    .principle h3{
+      font-size:clamp(1.2rem, 2vw, 1.8rem);
+      margin-bottom:10px;
+    }
+
+    .principle p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .surface-demo{
+      min-height:100%;
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(247,251,255,.92), rgba(233,240,248,.88));
+    }
+
+    .surface-demo .inner{
+      position:relative;
+      height:100%;
+      min-height:500px;
+      padding:30px;
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+    }
+
+    .rings, .rings::before, .rings::after{
+      position:absolute;
+      border-radius:50%;
+      border:1px solid rgba(41,91,148,.12);
+      content:"";
+    }
+
+    .rings{
+      width:440px;
+      height:440px;
+      background:radial-gradient(circle, rgba(124,236,255,.12), transparent 58%);
+    }
+
+    .rings::before{
+      inset:36px;
+    }
+
+    .rings::after{
+      inset:86px;
+    }
+
+    .floating-card{
+      width:min(100%, 380px);
+      border-radius:32px;
+      background:linear-gradient(180deg, rgba(255,255,255,.9), rgba(236,243,250,.88));
+      border:1px solid rgba(18,50,93,.1);
+      box-shadow:0 30px 60px rgba(20,40,80,.18);
+      padding:26px;
+      backdrop-filter: blur(18px);
+      transform:rotate(-5deg);
+    }
+
+    .floating-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:18px;
+    }
+
+    .chrome-dot{
+      width:14px;
+      aspect-ratio:1;
+      border-radius:50%;
+      background:linear-gradient(180deg, #9af7ff, #1e72cf 65%, #133158);
+      box-shadow:0 0 0 8px rgba(124,236,255,.12);
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(18,50,93,.06);
+      color:var(--navy);
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .floating-card h3{
+      font-size:clamp(1.4rem, 2vw, 2rem);
+      margin-bottom:12px;
+    }
+
+    .floating-card p{
+      margin:0 0 22px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .line-ui{
+      display:grid;
+      gap:12px;
+    }
+
+    .line-ui span{
+      display:block;
+      border-radius:999px;
+      height:12px;
+      background:
+        linear-gradient(90deg, rgba(19,50,93,.92), rgba(46,132,219,.72));
+      opacity:.92;
+    }
+
+    .line-ui span:nth-child(2){width:78%; background:linear-gradient(90deg, rgba(19,50,93,.3), rgba(46,132,219,.5))}
+    .line-ui span:nth-child(3){width:58%; background:linear-gradient(90deg, rgba(19,50,93,.18), rgba(124,236,255,.6))}
+
+    .services{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+    }
+
+    .service{
+      padding:26px 0;
+      border-bottom:1px solid rgba(18,50,93,.1);
+      display:grid;
+      gap:10px;
+    }
+
+    .service:last-child{border-bottom:none}
+
+    .service strong{
+      font-family:"Orbitron", sans-serif;
+      font-size:1.12rem;
+      color:var(--navy-deep);
+    }
+
+    .service p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+      max-width:58ch;
+    }
+
+    .service em{
+      color:var(--blue);
+      font-style:normal;
+      font-weight:800;
+      letter-spacing:.03em;
+    }
+
+    .showcase{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+
+    .mock{
+      min-height:220px;
+      border-radius:28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.88), rgba(232,239,246,.92));
+      border:1px solid rgba(18,50,93,.1);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .mock::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 78% 18%, rgba(124,236,255,.22), transparent 16%),
+        linear-gradient(140deg, rgba(255,255,255,.74), transparent 34%);
+      pointer-events:none;
+    }
+
+    .mock-inner{
+      height:100%;
+      padding:24px;
+      display:grid;
+      align-content:space-between;
+    }
+
+    .mock-label{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.11em;
+      font-weight:800;
+      color:var(--blue);
+    }
+
+    .mock h3{
+      font-size:clamp(1.2rem, 2vw, 1.9rem);
+      max-width:12ch;
+    }
+
+    .bars{
+      display:grid;
+      gap:10px;
+    }
+
+    .bars i{
+      display:block;
+      height:10px;
+      border-radius:999px;
+      background:linear-gradient(90deg, #133158, #2e85db, #a4f8ff);
+    }
+
+    .bars i:nth-child(2){width:80%}
+    .bars i:nth-child(3){width:56%}
+
+    .cta-band{
+      padding:80px 0 110px;
+    }
+
+    .cta-shell{
+      border-radius:36px;
+      padding:34px;
+      background:
+        linear-gradient(180deg, rgba(18,47,88,.96), rgba(7,22,43,.96));
+      color:white;
+      box-shadow:0 30px 80px rgba(9,25,48,.34);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .cta-shell::before{
+      content:"";
+      position:absolute;
+      inset:auto -10% -35% auto;
+      width:340px;
+      height:340px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(124,236,255,.38), transparent 60%);
+      filter:blur(6px);
+    }
+
+    .cta-shell::after{
+      content:"";
+      position:absolute;
+      inset:16px;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.1);
+      pointer-events:none;
+    }
+
+    .cta-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:22px;
+      align-items:end;
+      position:relative;
+      z-index:1;
+    }
+
+    .cta-shell h2{
+      color:white;
+      max-width:12ch;
+      font-size:clamp(2rem, 4vw, 4rem);
+    }
+
+    .cta-shell p{
+      margin:14px 0 0;
+      color:rgba(255,255,255,.76);
+      line-height:1.75;
+      max-width:60ch;
+    }
+
+    .footer{
+      padding:0 0 42px;
+      color:var(--muted);
+    }
+
+    .footer-row{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      padding-top:20px;
+      border-top:1px solid rgba(18,50,93,.08);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(22px);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    .stagger > *{
+      opacity:0;
+      transform:translateY(22px);
+      animation:rise .9s ease forwards;
+    }
+
+    .stagger > *:nth-child(1){animation-delay:.05s}
+    .stagger > *:nth-child(2){animation-delay:.15s}
+    .stagger > *:nth-child(3){animation-delay:.25s}
+    .stagger > *:nth-child(4){animation-delay:.35s}
+    .stagger > *:nth-child(5){animation-delay:.45s}
+
+    @keyframes rise{
+      to{opacity:1; transform:none}
+    }
+
+    @media (min-width: 760px){
+      .nav-links{display:flex}
+      .metrics-grid{grid-template-columns:repeat(3, 1fr)}
+      .showcase{grid-template-columns:1.05fr .95fr}
+    }
+
+    @media (min-width: 980px){
+      .hero-grid{
+        grid-template-columns:1.02fr .98fr;
+        gap:40px;
+      }
+      .split{
+        grid-template-columns:1.02fr .98fr;
+        gap:24px;
+      }
+      .cta-grid{
+        grid-template-columns:1.1fr .9fr;
+      }
+      .footer-row{
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .reveal, .stagger > *{
+        opacity:1 !important;
+        transform:none !important;
+        animation:none !important;
+        transition:none !important;
+      }
+      .cta, .ghost{transition:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a href="#top" class="brand" aria-label="SM-tech Salam accueil">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-name">
+          <strong>SM-tech</strong>
+          <span>Salam</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a href="#identite">Identité</a>
+        <a href="#services">Services</a>
+        <a href="#univers">Univers</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a href="#contact" class="cta">Lancer le projet</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy stagger">
+          <div class="eyebrow">Signature visuelle chrome bleu</div>
+          <h1>Une présence tech premium, nette et lumineuse.</h1>
+          <p>
+            J’ai décliné le style de votre logo en une direction web cohérente :
+            fond clair texturé, reflets métalliques, bleu profond, éclats cyan et surfaces vitrées.
+            L’ensemble garde une sensation futuriste sans tomber dans le cliché.
+          </p>
+          <div class="hero-actions">
+            <a class="cta" href="#univers">Voir l’univers</a>
+            <a class="ghost" href="#services">Explorer le site</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="orb" aria-hidden="true"></div>
+
+          <div class="logo-stage" aria-label="Aperçu du style SM-tech Salam">
+            <div class="sm-logo">
+              <div class="monogram" aria-hidden="true">
+                <svg viewBox="0 0 420 320" role="img">
+                  <defs>
+                    <linearGradient id="chromeStroke" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#ffffff"/>
+                      <stop offset="24%" stop-color="#8cedff"/>
+                      <stop offset="48%" stop-color="#2b84dc"/>
+                      <stop offset="76%" stop-color="#132f59"/>
+                      <stop offset="100%" stop-color="#08162c"/>
+                    </linearGradient>
